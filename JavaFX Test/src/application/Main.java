@@ -24,6 +24,7 @@ public class Main extends Application {
 		BorderPane root = new BorderPane();
 
 		drawLeftSection(root);
+		drawRightContent(root);
 
 		String cssLayout = "-fx-border-color: red;\n" + "-fx-border-insets: 5;\n" + "-fx-border-width: 3;\n"
 				+ "-fx-border-style: dashed;\n";
@@ -60,12 +61,15 @@ public class Main extends Application {
 		boxIntensità.getChildren().addAll(intensità, comboIntensità);
 
 		Button inserisciBtn = new Button("Inserisci");
+		VBox boxBtn = new VBox(10);
+		boxBtn.getChildren().add(inserisciBtn);
+		boxBtn.setAlignment(Pos.BASELINE_RIGHT);
 
 		VBox boxDataAtt = new VBox(10);
 		boxDataAtt.getChildren().addAll(boxData, boxAttività);
 
 		VBox boxDurataInt = new VBox(10);
-		boxDurataInt.getChildren().addAll(boxDurata, boxIntensità, inserisciBtn);
+		boxDurataInt.getChildren().addAll(boxDurata, boxIntensità, boxBtn);
 		
 		
 		Text stampaReport = new Text("Stampa report settimanale");
@@ -77,10 +81,10 @@ public class Main extends Application {
 		VBox centerBox = new VBox(10);
 		centerBox.getChildren().addAll(boxDurataInt, boxReport);
 		boxReport.setAlignment(Pos.BASELINE_RIGHT);
-		centerBox.setMargin(boxReport, new Insets(250, 0, 0, 0));
+		VBox.setMargin(boxReport, new Insets(250, 0, 0, 0));
 		
 
-		HBox leftBox = new HBox(20);
+		HBox leftBox = new HBox(30);
 		leftBox.getChildren().addAll(boxDataAtt, centerBox);
 
 		root.setLeft(leftBox);
