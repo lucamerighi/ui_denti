@@ -13,6 +13,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Spinner;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -23,7 +24,7 @@ public class Main extends Application {
 
 		BorderPane root = new BorderPane();
 
-		// Top
+		// Left
 		Text data = new Text("Data: ");
 		DatePicker datePicker = new DatePicker(LocalDate.now());
 		VBox boxData = new VBox(10);
@@ -32,10 +33,7 @@ public class Main extends Application {
 		Text durata = new Text("Durata: ");
 		Spinner<Integer> spinnerDurata = new Spinner<Integer>(0, 100, 0, 5);
 		VBox boxDurata = new VBox(10);
-		boxDurata.getChildren().addAll(durata, spinnerDurata);
-
-		HBox dataDurata = new HBox(20);
-		dataDurata.getChildren().addAll(boxData, boxDurata);
+		boxDurata.getChildren().addAll(durata, spinnerDurata);		
 
 		Text attività = new Text("Attività: ");
 		ComboBox comboAttività = new ComboBox<String>(FXCollections.observableArrayList("Attività a corpo libero"));
@@ -50,16 +48,20 @@ public class Main extends Application {
 		boxIntensità.getChildren().addAll(intensità, comboIntensità);
 
 		Button inserisciBtn = new Button("Inserisci");
+		inserisciBtn.setAlignment(Pos.BOTTOM_RIGHT);		
 
-		HBox boxAttInt = new HBox(30);
-		boxAttInt.getChildren().addAll(boxAttività, boxIntensità);
+		VBox boxDataAtt = new VBox(10);
+		boxDataAtt.getChildren().addAll(boxData, boxAttività);
+		
+		VBox boxDurataInt = new VBox(10);
+		boxDurataInt.getChildren().addAll(boxDurata, boxIntensità, inserisciBtn);
 
-		VBox topBox = new VBox(20);
-		topBox.getChildren().addAll(dataDurata, boxAttInt);
+		HBox leftBox = new HBox(20);
+		leftBox.getChildren().addAll(boxDataAtt, boxDurataInt);
 		
 
-		root.setTop(topBox);
-		BorderPane.setMargin(topBox, new Insets(10));
+		root.setLeft(leftBox);
+		BorderPane.setMargin(leftBox, new Insets(10));
 
 		String cssLayout = "-fx-border-color: red;\n" + "-fx-border-insets: 5;\n" + "-fx-border-width: 3;\n"
 				+ "-fx-border-style: dashed;\n";
